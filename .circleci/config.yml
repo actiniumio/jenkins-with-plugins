@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build_images:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Update Cache
+          command: sudo apt-get -y update
+      - run:
+          name: Install JQ
+          command: sudo apt-get install jq
+      - run:
+          name: Discover Jenkins tags
+          command: ./download_tags.sh
+      - run:
+          name: Build docker images
+          command: ./build_images.sh
+workflows:
+  version: 2
+  test-to-master:
+    jobs:
+      - build_images
