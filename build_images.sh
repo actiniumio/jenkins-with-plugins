@@ -6,3 +6,5 @@ while read version; do
   docker tag jenkins $DOCKER_USER/jenkins:$version
   docker push $DOCKER_USER/jenkins:$version
 done < tags.txt
+tac tags.txt > tags_ordered.txt
+mv tags_ordered.txt tags.txt
