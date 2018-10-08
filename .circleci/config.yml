@@ -11,11 +11,15 @@ jobs:
           name: Install JQ
           command: sudo apt-get install jq
       - run:
+          name: Login to Docker HUB
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
           name: Discover Jenkins tags
           command: ./download_tags.sh
       - run:
           name: Build docker images
           command: ./build_images.sh
+
 workflows:
   version: 2
   test-to-master:
