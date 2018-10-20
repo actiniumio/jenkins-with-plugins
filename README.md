@@ -3,8 +3,8 @@
 [![CircleCI](https://circleci.com/gh/actiniumio/jenkins-with-plugins/tree/master.svg?style=svg)](https://circleci.com/gh/actiniumio/jenkins-with-plugins/tree/master)
 
 This image is destinated to be used by the [Allspark](https://github.com/actiniumio/allspark)
-project. The build is configured to mirror `jenkins/jenkins` repository, so you can
-use any version available on the official image.
+project. The build is configured to mirror `jenkins/jenkins` debian images, so you can
+use any version available on the official image (as long as it is not an `alpine` version).
 
 This image contains docker, as it is intended to be used to provision developers
 defined build containers. The Docker socket must be mounted in the container for
@@ -39,7 +39,11 @@ docker run \
 > To build one version of jenkins :
 
 ```sh
-# You can use any version available at https://hub.docker.com/r/jenkins/jenkins/tags/
+# You can use any debian version available at https://hub.docker.com/r/jenkins/jenkins/tags/
+# List available tags:
+./download_tags
+
+# Build with the latest jenkins version
 version=latest
 docker build  -t jenkins --build-arg JENKINS_VERSION=$version .
 ```

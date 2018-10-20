@@ -9,7 +9,7 @@ function download_page() {
 
   echo "[Download] $url"
   curl -s $url -o tags.raw.json
-  cat tags.raw.json | jq -cMr '.results[].name' >> tags.txt
+  cat tags.raw.json | jq -cMr '.results[].name' | grep -v alpine >> tags.txt || true
 }
 
 download_page "https://hub.docker.com/v2/repositories/$repository/tags/"
@@ -32,4 +32,4 @@ cat tags.txt
 echo ""
 echo "Summary:"
 echo " - Pages fetched   : $page"
-echo " - Tags discovered : $(wc -l tags.txt)"
+echo " - Tags discovered : $(wc -l tags.txt | cut -d' ' -f1)"
