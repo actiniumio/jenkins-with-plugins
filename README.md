@@ -1,5 +1,7 @@
 ## Allspark Jenkins image
 
+[![CircleCI](https://circleci.com/gh/actiniumio/jenkins-with-plugins/tree/master.svg?style=svg)](https://circleci.com/gh/actiniumio/jenkins-with-plugins/tree/master)
+
 This image is destinated to be used by the [Allspark](https://github.com/actiniumio/allspark)
 project. The build is configured to mirror `jenkins/jenkins` repository, so you can
 use any version available on the official image.
