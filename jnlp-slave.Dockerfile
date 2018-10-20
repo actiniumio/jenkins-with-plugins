@@ -1,6 +1,6 @@
-ARG JENKINS_VERSION
+ARG JENKINS_SLAVE_VERSION
 
-FROM jenkins/jenkins:${JENKINS_VERSION}
+FROM jenkins/jnlp-slave:${JENKINS_SLAVE_VERSION}
 
 USER root
 RUN apt update -y \
@@ -15,8 +15,5 @@ RUN apt update -y \
   && apt install -y \
     docker-ce \
   && apt clean
-
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 USER jenkins

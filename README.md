@@ -15,23 +15,31 @@ the permissions to create a job.
 ### Usage
 
 ```sh
+# Master
 docker run \
   -it \
   -p 8080:8080 \
   --name jenkins \
   actiniumio/jenkins
+
+# Slave
+docker run \
+  -it \
+  --name jenkins_slave \
+  actiniumio/jnlp-slave
 ```
 
 > With docker socket mount
 
 ```sh
+# Slave
 docker run \
   -it \
   -p 8080:8080 \
-  --name jenkins \
+  --name jenkins_slave \
   -u jenkins:$(getent group docker | cut -d: -f3) \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  actiniumio/jenkins
+  actiniumio/jnlp-slave
 ```
 
 ## Build
@@ -43,9 +51,21 @@ docker run \
 # List available tags:
 ./download_tags
 
-# Build with the latest jenkins version
+# Build with the latest versions
 version=latest
-docker build  -t jenkins --build-arg JENKINS_VERSION=$version .
+
+docker build  \
+  -t jenkins \
+  --build-arg JENKINS_VERSION=$version \
+  -f jenkins.Dockerfile \
+  .
+
+docker build  \
+  -t jenkins \
+  --build-arg JENKINS_SLAVE_VERSION=$version \
+  -f jnlp-slave.Dockerfile \
+  .
+
 ```
 
 > Gotta build 'em all
