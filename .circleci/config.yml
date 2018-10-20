@@ -17,7 +17,7 @@ jobs:
           name: Discover Jenkins tags
           # Restricted to 5 because of build are long and
           # won't fit in the circleCI free plan otherwise
-          command: MAX_PAGES=5 ./download_tags.sh
+          command: MAX_PAGES=1 ./download_tags.sh
       - run:
           name: Build docker images
           command:  ./build_images.sh --push
