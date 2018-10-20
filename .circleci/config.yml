@@ -15,12 +15,12 @@ jobs:
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
           name: Discover Jenkins tags
-          command: ./download_tags.sh
-      - run:
-          name: Build docker images
           # Restricted to 5 because of build are long and
           # won't fit in the circleCI free plan otherwise
-          command: MAX_PAGES=5 ./build_images.sh --push
+          command: MAX_PAGES=5 ./download_tags.sh
+      - run:
+          name: Build docker images
+          command:  ./build_images.sh --push
 
 workflows:
   version: 2
