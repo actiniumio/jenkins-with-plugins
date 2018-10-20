@@ -18,7 +18,7 @@ jobs:
           command: ./download_tags.sh
       - run:
           name: Build docker images
-          command: ./build_images.sh
+          command: ./build_images.sh --push
 
 workflows:
   version: 2
