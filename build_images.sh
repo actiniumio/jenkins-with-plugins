@@ -23,7 +23,7 @@ function build_images() {
       --build-arg JENKINS_SLAVE_VERSION=$version \
       .
     docker tag $image $image:$version
-    if [ $# -gt 0 ] && [ $1 == "--push" ]
+    if [ $# -gt 0 ] && [ $2 == "--push" ]
     then
       docker tag $image ${DOCKER_USER}/$image:$version
       docker push $DOCKER_USER/$image:$version
@@ -31,5 +31,5 @@ function build_images() {
   done < $tags_file
 }
 
-build_images "jenkins/jenkins"
-build_images "jenkins/jnlp-slave"
+build_images "jenkins/jenkins" $1
+build_images "jenkins/jnlp-slave" $1
